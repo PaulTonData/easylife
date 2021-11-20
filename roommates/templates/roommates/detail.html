@@ -2,3 +2,7 @@
 <p>Distance: {{ posting.distance_time }} {{ posting.get_distance_mode_display }}</p>
 <p>Rent: ${{ posting.rent }}</p>
 <p>Description: {{ posting.description }}</p>
+
+{% for photo in posting.photo_set.all %}
+    <img src="{{photo.image.url}}" />
+{% endfor %}

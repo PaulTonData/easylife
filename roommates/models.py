@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 class Posting(models.Model):
     WALKING = "WALK"
@@ -25,10 +26,16 @@ class Posting(models.Model):
     def __str__(self):
         return self.title
 
+def get_image_filename(instance, filename):
+    title = instance.posting.title
+    slug = slugify(title)
+    return "posting_images/%s-%s" % (slug, filename)
+
 class Photo(models.Model):
     posting = models.ForeignKey(Posting, on_delete=models.CASCADE)
     alt_text = models.CharField(max_length=200)
-    blob = models.BinaryField()
+    image = models.ImageField(upload_to=get_image_filename,
+                              verbose_name="Image", blank=True)
 
     def __str__(self):
         return self.alt_text
