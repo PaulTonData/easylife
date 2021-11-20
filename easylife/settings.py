@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&^vwxa$dxb5le7e-vadb$xk8d9df93b6fha66vk6en1kzz#$#9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['stevenseasylife.com', 'www.stevenseasylife.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'stevenseasylife.com', 'www.stevenseasylife.com']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'roommates'
 ]
 
 MIDDLEWARE = [

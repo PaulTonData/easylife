@@ -1,0 +1,15 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'roommates/style.css' %}">
+
+<div style="background-color: white">
+{% if posting_list %}
+    <ul>
+    {% for posting in posting_list %}
+        <li><a href="{% url 'roommates:detail' posting.id %}">{{ posting.title}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No postings are available.</p>
+{% endif %}
+</div>
