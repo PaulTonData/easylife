@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 <h1>{{ posting.title }}</h1>
 <p>Distance: {{ posting.distance_time }} {{ posting.get_distance_mode_display }}</p>
 <p>Rent: ${{ posting.rent }}</p>
@@ -6,3 +9,4 @@
 {% for photo in posting.photo_set.all %}
     <img src="{{photo.image.url}}" />
 {% endfor %}
+{% endblock %}

@@ -1,8 +1,6 @@
-{% load static %}
+{% extends "base.html" %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'roommates/style.css' %}">
-
-<div style="background-color: white">
+{% block content %}
 {% if posting_list %}
     <ul>
     {% for posting in posting_list %}
@@ -12,4 +10,4 @@
 {% else %}
     <p>No postings are available.</p>
 {% endif %}
-</div>
+{% endblock %}

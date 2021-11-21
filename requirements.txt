@@ -1,0 +1,2 @@
+django-registration=="3.2.9"
+pillow=="8.4.0"
