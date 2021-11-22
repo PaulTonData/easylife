@@ -26,6 +26,10 @@ class Posting(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return f"/{self.id}/"
+
+
 def get_image_filename(instance, filename):
     title = instance.posting.title
     slug = slugify(title)

@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="{% url 'roommates:delete_post' posting.id %}" class="btn btn-light btn-md float-md-right" role="button" aria-pressed="true">Remove Posting</a>
+<a href="{% url 'roommates:edit_post' posting.id %}" class="btn btn-light btn-md float-md-right" role="button" aria-pressed="true">Edit Posting</a>
+
 <h1>{{ posting.title }}</h1>
 <p>Distance: {{ posting.distance_time }} {{ posting.get_distance_mode_display }}</p>
 <p>Rent: ${{ posting.rent }}</p>

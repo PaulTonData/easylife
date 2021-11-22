@@ -23,6 +23,19 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Posting.objects.all()[:5]
 
+class PostingCreateView(generic.edit.CreateView):
+    model = Posting
+    fields = ['title', 'rent', 'distance_time', 'distance_mode', 'description']
+
+class PostingUpdateView(generic.edit.UpdateView):
+    model = Posting
+    fields = ['title', 'rent', 'distance_time', 'distance_mode', 'description']
+
+class PostingDeleteView(generic.edit.DeleteView):
+    model = Posting
+    def get_success_url(self):
+        return "/"
+
 class DetailView(generic.DetailView):
     model = Posting
     template_name = "roommates/detail.html"
