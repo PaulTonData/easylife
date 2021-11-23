@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -22,6 +23,7 @@ class Posting(models.Model):
         choices=DISTANCE_MODE_CHOICES,
         default=WALKING)
     description = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

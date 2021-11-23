@@ -10,7 +10,7 @@
     {% if user.is_authenticated %}
       <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
     {% else %}
-      <p>Please login to see this page.</p>
+      <p>You need to sign in to make a posting or send a message. Please sign in or create an account.</p>
     {% endif %}
   {% endif %}
 
@@ -30,6 +30,8 @@
       <input type="hidden" name="next" value="{{ next }}" />
   </form>
 
-  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+  <p><a href="{% url 'password_reset' %}">Lost password?</a>
+  <br>
+  <a href="{% url 'django_registration_register' %}">Create an account!</a></p>
 
 {% endblock %}
