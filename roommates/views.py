@@ -6,7 +6,7 @@ from django.template import loader
 from django.urls import reverse
 from django.views import generic
 
-from .forms import MessageForm
+from .forms import MessageForm, PhotoFormSet, PostingForm
 from .models import Posting, Photo
 
 class IndexView(generic.ListView):
@@ -23,25 +23,62 @@ class IndexView(generic.ListView):
     """
 
     def get_queryset(self):
-        return Posting.objects.all()[:5]
+        return Posting.objects.all()
 
 class PostingCreateView(generic.edit.CreateView):
     model = Posting
-    fields = ['title', 'rent', 'distance_time', 'distance_mode', 'description']
+    form_class = PostingForm
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
+    def get_context_data(self, **kwargs):
+        context = super(PostingCreateView, self).get_context_data(**kwargs)
+
+        if self.request.POST:
+            context['formset'] = PhotoFormSet(self.request.POST, self.request.FILES, queryset=Photo.objects.none())
+            context['detail_form'] = PostingForm(self.request.POST)
+        else:
+            context['formset'] = PhotoFormSet(queryset=Photo.objects.none())
+            context['detail_form'] = PostingForm()
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        formset = PhotoFormSet(request.POST, request.FILES)
+        detail_form = PostingForm(request.POST)
+        if formset.is_valid() and detail_form.is_valid():
+            return self.form_valid(formset, detail_form)
+
+    def form_valid(self, formset, detail_form):
+        self.object = detail_form.save(commit=False)
 
         if self.request.user.is_authenticated:
             self.object.user = self.request.user
             self.object.save()
+
+            for photo_form in formset.cleaned_data:
+                if photo_form:
+                    image = photo_form['image']
+                    photo = Photo(posting=self.object, image=image)
+                    photo.save()
+
             return HttpResponseRedirect(self.get_success_url())
         else:
             raise Exception("no user logged in")
 
 class PostingUpdateView(generic.edit.UpdateView):
     model = Posting
-    fields = ['title', 'rent', 'distance_time', 'distance_mode', 'description']
+    form_class = PostingForm
+
+    def get_context_data(self, **kwargs):
+        context = super(PostingUpdateView, self).get_context_data(**kwargs)
+
+        if self.request.POST:
+            context['formset'] = PhotoFormSet(self.request.POST, self.request.FILES, queryset=Photo.objects.none())
+            context['detail_form'] = PostingForm(self.request.POST)
+        else:
+            context['formset'] = PhotoFormSet(queryset=Photo.objects.none())
+            context['detail_form'] = PostingForm()
+
+        return context
 
 class PostingDeleteView(generic.edit.DeleteView):
     model = Posting

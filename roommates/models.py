@@ -39,7 +39,7 @@ def get_image_filename(instance, filename):
 
 class Photo(models.Model):
     posting = models.ForeignKey(Posting, on_delete=models.CASCADE)
-    alt_text = models.CharField(max_length=200)
+    alt_text = models.CharField(max_length=200, blank=True)
     image = models.ImageField(upload_to=get_image_filename,
                               verbose_name="Image", blank=True)
 

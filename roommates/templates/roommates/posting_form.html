@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    <p>Enter Details</p>
+    {% for field in detail_form %}
+      {{ field.label }}: {{ field }} <br>
+    {% endfor %}
+    <p>Upload Photos</p>
+    {{ formset.management_form }}
+    {% for image_form in formset %}
+      {{ image_form }} <br>
+    {% endfor %}
+    <br>
     <input type="submit" value="Post" />
 </form>
 {% endblock %}
