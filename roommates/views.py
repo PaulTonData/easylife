@@ -105,7 +105,7 @@ def send_message(request, posting_id):
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return HttpResponseRedirect(reverse('roommates:send_message_confirm'))
-    return render(request, 'roommates/send_message.html', {'form': form})
+    return render(request, 'roommates/send_message.html', {'form': form, 'posting_id': posting_id})
 
 def send_message_confirm(request):
     return render(request, 'roommates/send_message_confirm.html')

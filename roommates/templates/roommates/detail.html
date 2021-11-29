@@ -2,16 +2,18 @@
 
 {% block content %}
 
+<a href="{% url 'roommates:index'%}" class="btn btn-light btn-md float-md-left" role="button" aria-pressed="true">Back to Listings</a>
 {% if user.id == posting.user.id %}
 <a href="{% url 'roommates:delete_post' posting.id %}" class="btn btn-light btn-md float-md-right" role="button" aria-pressed="true">Remove Posting</a>
 <a href="{% url 'roommates:edit_post' posting.id %}" class="btn btn-light btn-md float-md-right" role="button" aria-pressed="true">Edit Posting</a>
 {% else %}
 <a href="{% url 'roommates:send_message' posting.id %}" class="btn btn-light btn-md float-md-right" role="button" aria-pressed="true">Contact Poster!</a>
 {% endif %}
-
+<br>
+<br>
 <h1>{{ posting.title }}</h1>
-<p>Distance: {{ posting.distance_time }} minutes {{ posting.get_distance_mode_display }}</p>
-<p>Rent: ${{ posting.rent }}</p>
+<p>Distance: {{ posting.distance_time }} minutes from campus, {{ posting.get_distance_mode_display }}</p>
+<p>Rent (per person): ${{ posting.rent }} per month.</p>
 <p>Description: {{ posting.description }}</p>
 
 {% for photo in posting.photo_set.all %}
