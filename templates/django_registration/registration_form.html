@@ -2,10 +2,11 @@
 {% load i18n %}
 
 {% block content %}
+<h1 class="h3 mb-3 font-weight-normal">Create an account</h1>
 <form method="post" action=".">
   {% csrf_token %}
   {{ form.as_p }}
 
-  <button type="submit" class="btn btn-light btn-md">{% trans 'Submit' %}</button>
+  <button type="submit" class="btn btn-primary btn-md">{% trans 'Submit' %}</button>
 </form>
 {% endblock %}

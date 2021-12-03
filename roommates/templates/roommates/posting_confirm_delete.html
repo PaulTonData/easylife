@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{% url 'roommates:detail' posting.id %}" class="btn btn-light btn-md float-md-left" role="button" aria-pressed="true">Back to Posting</a>
+<a href="{% url 'roommates:detail' posting.id %}" class="btn btn-primary btn-md float-md-left" role="button" aria-pressed="true">Back to Posting</a>
 <br>
 <br>
 <form action="" method="post">
     {% csrf_token %}
     <p>Are you sure you want to delete posting?</p>
-    <button type="submit" class="btn btn-light btn-md">Confirm</button>
+    <button type="submit" class="btn btn-primary btn-md">Confirm</button>
 </form>
 {% endblock %}
