@@ -24,6 +24,7 @@ class Posting(models.Model):
         default=WALKING)
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

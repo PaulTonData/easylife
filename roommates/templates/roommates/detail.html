@@ -3,11 +3,14 @@
 {% block content %}
 
 <a href="{% url 'roommates:index'%}" class="btn btn-light btn-md float-md-left" role="button" aria-pressed="true">Back to Listings</a>
+{% if posting.get_next_by_created %}
+<a href="{% url 'roommates:detail' posting.get_next_by_created.id %}" class="btn btn-light btn-md float-md-left" role="button" aria-pressed="true">View Next</a>
+{% endif %}
 {% if user.id == posting.user.id %}
 <a href="{% url 'roommates:delete_post' posting.id %}" class="btn btn-light btn-md float-md-right" role="button" aria-pressed="true">Remove Posting</a>
 <a href="{% url 'roommates:edit_post' posting.id %}" class="btn btn-light btn-md float-md-right" role="button" aria-pressed="true">Edit Posting</a>
 {% else %}
-<a href="{% url 'roommates:send_message' posting.id %}" class="btn btn-light btn-md float-md-right" role="button" aria-pressed="true">Contact Poster!</a>
+<a href="{% url 'roommates:send_message' posting.id %}" class="btn btn-light btn-md float-md-left" role="button" aria-pressed="true">Contact Poster!</a>
 {% endif %}
 <br>
 <br>
