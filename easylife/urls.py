@@ -17,10 +17,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from django_registration.backends.activation.views import RegistrationView
+
+from . import forms
 
 urlpatterns = [
     path('', include('roommates.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/register/', RegistrationView.as_view(form_class=forms.RegistrationFormStevensEmail), name='registration_register'),
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
