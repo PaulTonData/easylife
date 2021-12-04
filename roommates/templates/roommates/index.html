@@ -3,13 +3,16 @@
 {% block content %}
 <h1 class="h3 mb-3 font-weight-normal">Browse Listings</h1>
 {% if posting_list %}
-    <ul>
+    <div class="ml-5">
     {% for posting in posting_list %}
-        <li><a href="{% url 'roommates:detail' posting.id %}">{{ posting.title}}</a></li>
+        <div class="border border-primary mb-3">
+            <h1 class="h5 mb-0 font-weight-normal"><a href="{% url 'roommates:detail' posting.id %}">{{ posting.title}}</a></h1>
+            <span>${{ posting.rent }} monthly | {{ posting.distance_time }} min. from campus</span>
+        </div>
     {% endfor %}
-    </ul>
+    </div>
 {% else %}
     <p>No postings are available.</p>
 {% endif %}
-
+<br>
 {% endblock %}
