@@ -1,0 +1,24 @@
+{% extends "marketplace/base.html" %}
+
+{% block content %}
+
+<a href="{% url 'marketplace:market_home'%}" class="btn btn-primary btn-md float-md-left mr-1" role="button" aria-pressed="true">Back to Marketplace</a>
+{% if posting.get_next_by_created %}
+<a href="{% url 'marketplace:detail' posting.get_next_by_created.id %}" class="btn btn-primary btn-md float-md-left mr-1" role="button" aria-pressed="true">View Next</a>
+{% endif %}
+{% if user.id == posting.user.id %}
+<a href="{% url 'marketplace:delete_post' posting.id %}" class="btn btn-primary btn-md float-md-right mr-1" role="button" aria-pressed="true">Remove Posting</a>
+<a href="{% url 'marketplace:edit_post' posting.id %}" class="btn btn-primary btn-md float-md-right mr-1" role="button" aria-pressed="true">Edit Posting</a>
+{% else %}
+<a href="{% url 'marketplace:send_message' posting.id %}" class="btn btn-primary btn-md float-md-left mr-1" role="button" aria-pressed="true">Contact Poster!</a>
+{% endif %}
+<br>
+<br>
+<h1>{{ posting.title }}</h1>
+<p>Price: ${{ posting.price }}</p>
+<p>Description: {{ posting.description }}</p>
+
+{% for photo in posting.photo_set.all %}
+    <img src="{{photo.image.url}}" />
+{% endfor %}
+{% endblock %}

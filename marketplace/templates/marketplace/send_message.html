@@ -1,0 +1,16 @@
+{% extends "marketplace/base.html" %}
+
+{% block content %}
+  <a href="{% url 'marketplace:detail' posting_id %}" class="btn btn-primary btn-md float-md-left" role="button" aria-pressed="true">Back to Posting</a>
+  <br>
+  <br>
+  <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+      {{ field.label }}: <br>
+      {{ field }} <br>
+      <br>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary btn-md">Send</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="h3 mb-3 font-weight-normal">Welcome to StevensEasyLife!</h1>
+<p>This is a website for Stevens students to find roommates and buy and sell home goods like furniture or electronics.</p>
+<p>You can browse the site without making an account, but if you want to contact someone about their posting or make a posting yourself, you will have to create an account and sign in.</p>
+<p>To get started click one of the two links below!</p>
+<br>
+<a class="nav-link" href="{% url 'roommates:index' %}">Roommates: I have an apartment and need to find roommates or want to find a room in an existing apartment.</a>
+<br>
+<a class="nav-link" href="{% url 'marketplace:market_home' %}">Marketplace: I want to buy/sell home goods.</a>
+{% endblock %}

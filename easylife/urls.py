@@ -22,7 +22,9 @@ from django_registration.backends.activation.views import RegistrationView
 from . import forms
 
 urlpatterns = [
+    path('', include('landing.urls')),
     path('', include('roommates.urls')),
+    path('', include('marketplace.urls')),
     path('admin/', admin.site.urls),
     path('accounts/register/', RegistrationView.as_view(form_class=forms.RegistrationFormStevensEmail), name='registration_register'),
     path('accounts/', include('django_registration.backends.activation.urls')),

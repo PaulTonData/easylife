@@ -1,0 +1,33 @@
+{% extends "marketplace/base.html" %}
+
+{% block content %}
+{% if posting %}
+<a href="{% url 'marketplace:detail' posting.id %}" class="btn btn-primary btn-md float-md-left" role="button" aria-pressed="true">Back to Posting</a>
+{% else %}
+<a href="{% url 'marketplace:market_home'%}" class="btn btn-primary btn-md float-md-left" role="button" aria-pressed="true">Back to Marketplace</a>
+{% endif %}
+<br>
+<br>
+{% if posting %}
+<h1 class="h3 mb-3 font-weight-normal">Edit Posting</h1>
+{% else %}
+<h1 class="h3 mb-3 font-weight-normal">Make a Posting</h1>
+{% endif %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1 class="h5 mb-3 font-weight-normal">Enter Details</h1>
+    {% for field in detail_form %}
+      {{ field.label }}: <br>
+      {{ field }} <br>
+      <br>
+    {% endfor %}
+    <br>
+    <h1 class="h5 mb-3 font-weight-normal">Upload Photos</h1>
+    {{ formset.management_form }}
+    {% for image_form in formset %}
+      {{ image_form }} <br>
+    {% endfor %}
+    <br>
+    <button type="submit" class="btn btn-primary btn-md">Post</button>
+</form>
+{% endblock %}

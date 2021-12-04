@@ -64,6 +64,11 @@ class PostingCreateView(generic.edit.CreateView):
         else:
             raise Exception("no user logged in")
 
+    def get_success_url(self):
+        return reverse('roommates:detail', kwargs={
+            'pk': self.object.pk
+        })
+
 class PostingUpdateView(generic.edit.UpdateView):
     model = Posting
     form_class = PostingForm
@@ -80,10 +85,15 @@ class PostingUpdateView(generic.edit.UpdateView):
 
         return context
 
+    def get_success_url(self):
+        return reverse('roommates:detail', kwargs={
+            'pk': self.object.pk
+        })
+
 class PostingDeleteView(generic.edit.DeleteView):
     model = Posting
     def get_success_url(self):
-        return "/"
+        return "/rooms/"
 
 class DetailView(generic.DetailView):
     model = Posting
