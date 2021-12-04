@@ -1,12 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="h3 mb-3 font-weight-normal">Welcome to StevensEasyLife!</h1>
-<p>This is a website for Stevens students to find roommates and buy and sell home goods like furniture or electronics.</p>
-<p>You can browse the site without making an account, but if you want to contact someone about their posting or make a posting yourself, you will have to create an account and sign in.</p>
-<p>To get started click one of the two links below!</p>
+<h1 class="h3 mb-3 font-weight-normal text-center">Welcome to Stevens EasyLife!</h1>
+
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md-6">
+        <p class="text-center">This is a place for Stevens students to find roommates and buy or sell home goods like furniture and electronics.</p>
+        <p class="text-center">You can browse without registering, but to send a message or make your own post, you will have to create an account using your stevens.edu email.</p>
+    </div>
+    <div class="col-md"></div>
+</div>
 <br>
-<a class="nav-link" href="{% url 'roommates:index' %}">Roommates: I have an apartment and need to find roommates or want to find a room in an existing apartment.</a>
 <br>
-<a class="nav-link" href="{% url 'marketplace:market_home' %}">Marketplace: I want to buy/sell home goods.</a>
+<div class="text-center row">
+    <div class="col-md-6">
+        <p>Looking for a room or have an apartment and looking for roommates?</p>
+        <a href="{% url 'roommates:index' %}" class="btn btn-primary btn-lg float-none" role="button" aria-pressed="true">Roommates</a>
+    </div>
+    <div class="col-md-6">
+        <p>Looking to buy or sell furniture, electronics, or other home goods?</p>
+        <a href="{% url 'marketplace:market_home' %}" class="btn btn-primary btn-lg float-none" role="button" aria-pressed="true">Marketplace</a>
+    </div>
+</div>
+<br>
+<br>
 {% endblock %}
